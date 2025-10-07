@@ -6,19 +6,26 @@
         <title>Esempio Javascript</title>
         <style>
             .cmbc {
-                color: green;
-                font-weight: bold;
+                color: green;           /* Imposta il colore del testo su verde */
+                font-weight: bold;      /* Imposta il testo in grassetto */
             }
         </style>
     </head>
     <body>
-        <h1 id = "titolo">Ciao!</h1>
-        <button onclick = "cliccami()">Cliccami</button>
+        <!-- Titolo principale della pagina, con id per la selezione tramite JavaScript -->
+        <h1 id="titolo">Ciao!</h1>
+        <!-- Bottone che, quando cliccato, esegue la funzione cliccami() -->
+        <button onclick="cliccami()">Cliccami</button>
         <script>
+            // Definizione della funzione cliccami, eseguita al click del bottone
             function cliccami() {
+                // Recupera l'elemento con id "titolo" e lo assegna alla variabile tit
                 var tit = document.getElementById("titolo");
-                tit.textContent="Magia!";
+                // Modifica il testo del titolo in "Magia!"
+                tit.textContent = "Magia!";
+                // Aggiunge la classe CSS "cmbc" al titolo per cambiare stile
                 tit.classList.add("cmbc");
+                // Ora il titolo sarà verde e in grassetto
             }
         </script>
     </body> 
