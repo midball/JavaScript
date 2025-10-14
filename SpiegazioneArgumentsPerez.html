@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title>Oggetto Arguments</title>
+    </head>
+    <body>
+        <h1>Spiegazione arguments</h1>
+    </body>
+    <script>
+        function calcola() {
+            // arguments è un oggetto simile ad array disponibile in tutte le funzioni che contiene tutti i parametri passati alla funzione
+            var operazione = arguments[0]; // Il primo argomento specifica l'operazione (+, -, *, /)
+            var result = 0;
+            
+            // Iteriamo attraverso tutti gli argomenti a partire dal secondo (indice 1)
+            for(var i = 1; i < arguments.length; i++) {
+                switch(operazione) {
+                    case '+':
+                        result += arguments[i]; // Somma tutti i numeri
+                        break;
+                    case '-':
+                        result -= arguments[i]; // Sottrae tutti i numeri
+                        break;
+                    case '*':
+                        result *= arguments[i]; // Moltiplica tutti i numeri
+                        break;
+                    case '/':
+                        result /= arguments[i]; // Divide tutti i numeri
+                        break;
+                    default:
+                        result = 0; // Operazione non riconosciuta
+                }
+            }
+            return result;
+        }
+    </script>
+</html>

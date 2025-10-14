@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title>Azzecca e Azzerra</title> 
+    </head>
+    <body>
+        <h1>Giochino Azzecca e Azzerra</h1>
+    </body>
+    <script>
+        // Creazione dell'array principale con 50 numeri casuali da 1 a 50
+        var array = [];
+        for (var i = 0; i < 50; i++) {
+            // Genera un numero casuale intero tra 1 e 50 (inclusi)
+            array.push(Math.floor(Math.random() * 50) + 1);
+        }
+
+        // Stampa l'array iniziale nella console per riferimento
+        console.log("Array iniziale:", array);
+
+        // Funzione che controlla se tutti gli elementi dell'array sono uguali a zero
+        function tuttiZeri(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] !== 0) return false; // Appena ne trova uno diverso da 0, ritorna false
+            }
+            return true; // Se finisce il ciclo senza trovare valori diversi da 0, ritorna true
+        }
+
+        // 3. Ciclo principale: continua finché non tutti gli elementi sono zero
+        while (!tuttiZeri(array)) {
+
+            // Chiede all'utente di inserire un numero
+            var numero = prompt("Inserisci un numero per azzerare i suoi multipli:");
+
+            // Converte l'input in numero
+            numero = Number(numero);
+
+            // Ciclo che azzera i multipli del numero inserito
+            for (var i = 0; i < array.length; i++) {
+                if (array[i] % numero === 0) {
+                    array[i] = 0; // Azzera se è un multiplo
+                }
+            }
+
+            // Mostra l'array aggiornato dopo la modifica
+            console.log("Array aggiornato:", array);
+        }
+
+        // Quando tutti gli elementi sono zero, il ciclo termina
+        if (tuttiZeri(array)) {
+            console.log("Tutti gli elementi sono stati azzerati");
+            alert("Tutti gli elementi sono zero");
+        }
+
+    </script>
+</html>
