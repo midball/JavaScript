@@ -3,22 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Andamento Studente</title>
+        <title>Andamento Studente V1</title>
     </head>
     <body>
-        <h1>Andamento Studente</h1>
+        <h1>Andamento Studente V1</h1>
     </body>
     <script>
-        function confrontaMedie(mediaPrimoPeriodo) {
+        function confrontaMedie() {
             // Il primo (indice 0) è la media del primo periodo
             // Dal secondo indice in poi ci sono i voti del secondo periodo
 
             if (arguments.length <= 1) {
-                return "Nessun voto inserito per il secondo periodo.";
+                return "Nessun voto inserito nè per il primo periodio nè per il secondo periodo";
             }
 
+            let mediaPrimoPeriodo = arguments[0]; 
             let somma = 0;
-            let numVoti = arguments.length - 1; // escludiamo il primo parametro
+            let numVoti = arguments.length - 1; // un valore sarà per il primo periodo
 
             // Somma dei voti dal secondo argomento in poi
             for (let i = 1; i < arguments.length; i++) {
@@ -43,4 +44,3 @@
         console.log(confrontaMedie(6));                
     </script>
 </html>
-
