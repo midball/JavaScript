@@ -2,60 +2,43 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Andamento Studente</title>
     </head>
     <body>
         <h1>Andamento Studente</h1>
     </body>
     <script>
-        // Funzione che confronta la media del primo quadrimestre con quella del secondo
-        function confrontaMedie(mediaPrimoPeriodo, ...votiSecondoPeriodo) {
-            // ...votiSecondoPeriodo raccoglie tutti i voti passati dopo il primo parametro
-            // mediaPrimoPeriodo = media dei voti del primo periodo
-            // votiSecondoPeriodo = array dei voti del secondo periodo
+        function confrontaMedie(mediaPrimoPeriodo) {
+            // Il primo (indice 0) è la media del primo periodo
+            // Dal secondo indice in poi ci sono i voti del secondo periodo
 
-            // Controlla se l'utente ha inserito almeno un voto per il secondo periodo
-            if (votiSecondoPeriodo.length === 0) {
-                return "Nessun voto inserito per il secondo periodo."; 
+            if (arguments.length <= 1) {
+                return "Nessun voto inserito per il secondo periodo.";
             }
 
-            // Inizializza la variabile somma a 0
             let somma = 0;
+            let numVoti = arguments.length - 1; // escludiamo il primo parametro
 
-            // Ciclo che somma tutti i voti del secondo periodo
-            for (let i = 0; i < votiSecondoPeriodo.length; i++) {
-                somma += votiSecondoPeriodo[i];
+            // Somma dei voti dal secondo argomento in poi
+            for (let i = 1; i < arguments.length; i++) {
+                somma += arguments[i];
             }
 
-            // Calcolo della media del secondo periodo
-            let mediaSecondoPeriodo = somma / votiSecondoPeriodo.length;
-
-            // Confronto tra la media del secondo periodo e quella del primo
+            let mediaSecondoPeriodo = somma / numVoti;
 
             if (mediaSecondoPeriodo > mediaPrimoPeriodo) {
-                // Se la media del secondo è maggiore → miglioramento
-                return `Bravo! La tua media è migliorata.`;
+                return "Bravo! La tua media è migliorata.";
             } else if (mediaSecondoPeriodo < mediaPrimoPeriodo) {
-                // Se la media del secondo è minore → peggioramento
-                return `Attenzione, la tua media è peggiorata.`;
+                return "Attenzione, la tua media è peggiorata.";
             } else {
-                // Se le due medie sono uguali
-                return `La tua media è invariata.`;
+                return "La tua media è invariata.";
             }
         }
 
-        console.log(confrontaMedie(7.5, 8, 7, 9));       
-        // Miglioramento → Messaggio di congratulazioni
-
+        console.log(confrontaMedie(7.5, 8, 7, 9));      
         console.log(confrontaMedie(8, 6, 7, 7));        
-        // Peggioramento → Messaggio di avviso
-
         console.log(confrontaMedie(7, 7, 7, 7));        
-        // Uguale → Messaggio neutro
-
         console.log(confrontaMedie(6));                
-        // Nessun voto per il secondo periodo → messaggio di errore
-
     </script>
 </html>
