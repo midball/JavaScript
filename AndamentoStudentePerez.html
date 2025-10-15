@@ -28,17 +28,19 @@
             let mediaSecondoPeriodo = somma / numVoti;
 
             if (mediaSecondoPeriodo > mediaPrimoPeriodo) {
-                return "Bravo! La tua media è migliorata.";
+                return "La tua media è migliorata.";
             } else if (mediaSecondoPeriodo < mediaPrimoPeriodo) {
-                return "Attenzione, la tua media è peggiorata.";
+                return "La tua media è peggiorata.";
             } else {
-                return "La tua media è invariata.";
+                return "La tua media è uguale.";
             }
         }
-
+        
+        // Stampiamo a console qualche esempio
         console.log(confrontaMedie(7.5, 8, 7, 9));      
         console.log(confrontaMedie(8, 6, 7, 7));        
         console.log(confrontaMedie(7, 7, 7, 7));        
         console.log(confrontaMedie(6));                
     </script>
 </html>
+
