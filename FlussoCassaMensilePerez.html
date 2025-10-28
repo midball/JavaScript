@@ -53,8 +53,6 @@
                     // All'inizio chiediamo quanto c'è in cassa
                     let iniziale = parseFloat(prompt("Quanto hai in cassa?"));
                     
-
-                    
                     // Chiediamo i primi movimenti
                     let inputValori = prompt("Primi movimenti (separati da virgola):");
                     let numeri = [];
@@ -111,7 +109,7 @@
                         movimenti.push((segno === '+' ? "Entrate: " : "Uscite: ") + numeri.join(", "));
                         console.log("Saldo: " + vecchioSaldo + " → " + totale);
                     } else {
-                        console.log("Null");
+                        console.log("Numeri assenti");
                     }
                 }
                 
@@ -139,4 +137,5 @@
 </body>
 
 </html>
+
 
