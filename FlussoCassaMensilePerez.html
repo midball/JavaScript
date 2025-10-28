@@ -11,7 +11,7 @@
         let saldo = 0;
         let movimenti = [];
         
-        // Funzione che fa i calcoli - prende parametri variabili
+        // Funzione che fa i calcoli 
         function calcola() {
             // Se non passi niente, ti dice solo il saldo
             if (!arguments.length) return saldo;
@@ -42,7 +42,7 @@
 
         // Questa è la funzione principale che gestisce tutto
         function gestisciCassa() {
-            console.log("=== CONTROLLO CASSA ===");
+            console.log("--- CONTROLLO CASSA ---");
             
             let vaiAvanti = true;
             let primoGiro = true;
@@ -53,11 +53,7 @@
                     // All'inizio chiediamo quanto c'è in cassa
                     let iniziale = parseFloat(prompt("Quanto hai in cassa?"));
                     
-                    // Controllo base per vedere se è un numero valido
-                    if (!iniziale || isNaN(iniziale)) {
-                        console.log("Ma dai, metti un numero vero!");
-                        continue;
-                    }
+
                     
                     // Chiediamo i primi movimenti
                     let inputValori = prompt("Primi movimenti (separati da virgola):");
@@ -93,12 +89,6 @@
                     // Per i giri successivi chiediamo se sono entrate o uscite
                     let segno = prompt("Entrate (+) o uscite (-)?");
                     
-                    // Controllo veloce del segno
-                    if (segno !== '+' && segno !== '-') {
-                        console.log("Devi mettere + o -!");
-                        continue;
-                    }
-                    
                     // Prendiamo i valori da aggiungere o togliere
                     let inputValori = prompt("Importi (con virgola):");
                     let numeri = [];
@@ -121,7 +111,7 @@
                         movimenti.push((segno === '+' ? "Entrate: " : "Uscite: ") + numeri.join(", "));
                         console.log("Saldo: " + vecchioSaldo + " → " + totale);
                     } else {
-                        console.log("Niente da aggiungere...");
+                        console.log("Null");
                     }
                 }
                 
@@ -147,4 +137,5 @@
         gestisciCassa();
     </script>
 </body>
+
 </html>
