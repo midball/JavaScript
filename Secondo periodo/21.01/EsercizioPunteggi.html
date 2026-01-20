@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Esercizio Punteggi</title>
+    </head>
+    <body>
+        <h1>Esercizio Punteggi</h1>
+        <p>Vedere la console per visualizzare l'output</p>
+    </body>
+    <script>
+        // INIZIALIZZO ARRAY DI OGGETTI GIOCATORI                                                                                                                     
+        let giocatori = [
+            {
+                nome: "Luca Rossi",
+                puntiBase: 50,
+                prestazioni: [8, 6, 9]
+            },
+            {
+                nome: "Giulio Bianchi",
+                puntiBase: 50,
+                prestazioni: [7, 5, 9]
+            },
+            {
+                nome: "Christian Verdi",
+                puntiBase: 50,
+                prestazioni: [8, 9, 10]
+            }
+        ];
+
+        // CICLO FOR CHE ITERA SU OGNI GIOCATORE DEL NOSTRO ARRAY DI OGGETTI GIOCATORI E PERMETTE LA STAMPA ORDINATA DEI NOSTRI DATI
+        for (let giocatore of giocatori) {
+            let punteggioFinale = aggiornaPunti(giocatore.puntiBase, ...giocatore.prestazioni);
+            console.log("-- INFO GIOCATORE --")
+            console.log("NOME GIOCATORE:", giocatore.nome);
+            console.log("PUNTEGGIO BASE:",  giocatore.puntiBase)
+            console.log("PUNTEGGIO FINALE:", punteggioFinale);
+            console.log("")
+        }
+
+    // METODO CHE MI PERMETTE DI AGGIUNGERE AI PUNTI BASE DI CIASCUN GIOCATORE, I PUNTI RELATIVI ALLE SUE PRESTAZIONI
+    function aggiornaPunti(puntiBase, ...altriPunti) {
+        let puntiTotali = puntiBase; 
+        // CICLO FOR CHE PERMETTE DI SOMMARE I PUNTI DELLA PRESTAZIONI AI PUNTI BASE DI CIASCUN GIOCATORE   
+        for (let punti of altriPunti) {
+            puntiTotali += punti;
+        }
+        // RETURN DEI PUNTI TOTALI
+        return puntiTotali;
+    }
+</script>
+
+</body>
+</html>
