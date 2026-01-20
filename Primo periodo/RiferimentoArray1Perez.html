@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title>Riferimento Array</title>
+    </head>
+    <body>
+        <h1>Passaggio per riferimento: indirizzo</h1>
+    </body>
+    <script>
+        var days = ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'SUNDAY'];  // dichiarazione array e riempimento con giorni della settimana
+
+        var daysCopy = days;     // dichiarazione array che copia l'indirizzo del nostro primo array
+
+        console.log(daysCopy);  // stampiamo nella console gli elementi del nostro array copia che saranno gli stessi del nostro array originario
+
+        days[0] = 'Lunedì';     // cambiamo il primo elemento del nostro array originario 
+
+        console.log(days);      // stampiamo gli elementi del nostro array originario
+        console.log(daysCopy);   // stampiamo gli elementi del nostro array copia
+
+        var myNum = 10;         // variabile di nome myNum che ha valore di 10
+        var num2 = myNum;       // dichiarazione di una variabile con stesso valore di myNum
+        num2 = 4;               // cambiamo valore di num2 in 4
+
+        console.log(myNum);      // stampiamo a console il valore di myNum
+        console.log(num2);       // stampiamo a console il valore di num2
+
+    </script>
+</html>

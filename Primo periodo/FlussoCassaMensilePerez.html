@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controllo Cassa</title>
+</head>
+<body>
+    <script>
+        // Variabili per tenere traccia di tutto
+        let saldo = 0;
+        let movimenti = [];
+        
+        // Funzione che fa i calcoli 
+        function calcola() {
+            // Se non passi niente, ti dice solo il saldo
+            if (!arguments.length) return saldo;
+            
+            let primo = arguments[0];
+            
+            // Se il primo è un numero, parte da quello come base
+            if (typeof primo === 'number') {
+                saldo = primo;
+                // Poi aggiunge tutti gli altri numeri che gli dai
+                for (let i = 1; i < arguments.length; i++) {
+                    saldo += arguments[i];
+                }
+            } 
+            // Se invece è + o -, fa entrate o uscite
+            else if (primo === '+' || primo === '-') {
+                for (let i = 1; i < arguments.length; i++) {
+                    if (primo === '+') {
+                        saldo += arguments[i];
+                    } else {
+                        saldo -= arguments[i];
+                    }
+                }
+            }
+            
+            return saldo;
+        }
+
+        // Questa è la funzione principale che gestisce tutto
+        function gestisciCassa() {
+            console.log("--- CONTROLLO CASSA ---");
+            
+            let vaiAvanti = true;
+            let primoGiro = true;
+            
+            // Loop principale che continua finché l'utente vuole
+            while (vaiAvanti) {
+                if (primoGiro) {
+                    // All'inizio chiediamo quanto c'è in cassa
+                    let iniziale = parseFloat(prompt("Quanto hai in cassa?"));
+                    
+                    // Chiediamo i primi movimenti
+                    let inputValori = prompt("Primi movimenti (separati da virgola):");
+                    let numeri = [];
+                    
+                    // Dividiamo la stringa e convertiamo in numeri
+                    let pezzi = inputValori.split(',');
+                    for (let i = 0; i < pezzi.length; i++) {
+                        let num = parseFloat(pezzi[i]);
+                        // Se è un numero valido, lo aggiungiamo
+                        if (num) {
+                            numeri.push(num);
+                        }
+                    }
+                    
+                    let totale;
+                    // Se ci sono numeri validi, li aggiungiamo
+                    if (numeri.length > 0) {
+                        totale = calcola(iniziale, ...numeri);
+                        console.log("Calcolo: " + iniziale + " + " + numeri.join(" + "));
+                        movimenti.push("Inizio: " + iniziale + " + " + numeri.join(", "));
+                    } else {
+                        // Altrimenti teniamo solo il fondo cassa
+                        totale = calcola(iniziale);
+                        console.log("Solo fondo cassa: " + iniziale);
+                        movimenti.push("Fondo: " + iniziale);
+                    }
+                    
+                    console.log("Saldo attuale: " + totale);
+                    primoGiro = false;
+                    
+                } else {
+                    // Per i giri successivi chiediamo se sono entrate o uscite
+                    let segno = prompt("Entrate (+) o uscite (-)?");
+                    
+                    // Prendiamo i valori da aggiungere o togliere
+                    let inputValori = prompt("Importi (con virgola):");
+                    let numeri = [];
+                    let pezzi = inputValori.split(',');
+                    
+                    // Convertiamo in numeri
+                    for (let i = 0; i < pezzi.length; i++) {
+                        let num = parseFloat(pezzi[i]);
+                        if (num) {
+                            numeri.push(num);
+                        }
+                    }
+                    
+                    // Se abbiamo numeri validi, facciamo il calcolo
+                    if (numeri.length > 0) {
+                        let vecchioSaldo = saldo;
+                        let totale = calcola(segno, ...numeri);
+                        
+                        console.log((segno === '+' ? "Entrate: " : "Uscite: ") + numeri.join(" + "));
+                        movimenti.push((segno === '+' ? "Entrate: " : "Uscite: ") + numeri.join(", "));
+                        console.log("Saldo: " + vecchioSaldo + " → " + totale);
+                    } else {
+                        console.log("Numeri assenti");
+                    }
+                }
+                
+                // Chiediamo se continuare
+                let risposta = prompt("Altri movimenti? (s/n)");
+                if (risposta === null || risposta.toLowerCase() !== 's') {
+                    vaiAvanti = false;
+                }
+                
+                console.log("---");
+            }
+            
+            // Stampa finale
+            console.log("FINE GIORNATA");
+            console.log("Saldo finale: " + saldo);
+            console.log("Movimenti:");
+            for (let i = 0; i < movimenti.length; i++) {
+                console.log("  " + (i + 1) + ". " + movimenti[i]);
+            }
+        }
+
+        // Richiamo funzione
+        gestisciCassa();
+    </script>
+</body>
+
+</html>
+
+

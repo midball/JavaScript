@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title>Riferimento Array</title> 
+    </head>
+    <body>
+        <h1>Passaggio per riferimento: indirizzo e valore</h1>
+    </body>
+    <script>
+        // Creazione dell'array iniziale
+        var incassi1 = [7];
+
+        // Richiesta all’utente di inserire gli incassi di 7 giorni tramite prompt
+        for (var i = 0; i < 7; i++) {
+            var incasso = prompt("Inserire incassi del giorno " + (i + 1));
+            incassi1.push(Number(incasso)); // Converte in numero e aggiunge all'array
+        }
+
+        // Visualizza gli incassi inseriti
+        console.log("Incassi originali (incassi1):", incassi1);
+
+        // Copia per riferimento: incassi2 punta allo stesso array di incassi1
+        var incassi2 = incassi1;
+
+        // Applica uno sconto del 10% al primo (indice 0) e all’ultimo giorno (indice 6) della seconda settimana
+        incassi2[0] = incassi2[0] - (incassi2[0] / 100 * 10); // Modifica anche incassi1!
+        incassi2[6] = incassi2[6] - (incassi2[6] / 100 * 10); // Anche questa modifica si riflette su incassi1
+
+        // Visualizza gli array dopo la modifica -> identici
+        console.log("incassi1 dopo sconto su incassi2:", incassi1);
+        console.log("incassi2:", incassi2);
+
+        // Inizializzazione delle variabili per il calcolo delle medie
+        var media1 = 0, media2 = 0;
+
+        // Calcolo delle medie degli incassi (dalla posizione 1 alla 7 inclusa)
+        for (var i = 1; i < incassi1.length; i++) {
+            media1 += incassi1[i]; // Somma per incassi1
+            media2 += incassi2[i]; // Somma per incassi2 (identico a incassi1)
+        }
+
+        // Divisione per 7 giorni per ottenere la media
+        media1 = media1 / 7;
+        media2 = media2 / 7;
+
+        // Stampa delle medie nella console
+        console.log("La media settimanale senza sconto è: " + media1.toFixed(2));
+        console.log("La media settimanale con sconto è: " + media2.toFixed(2));
+
+        // Creazione di un terzo array per mostrare la differenza tra copia per riferimento e copia per valore
+
+        // Copia per valore con lo spread operator (nuovo array indipendente)
+        var incassi3 = [...incassi1];
+
+        // Applica un altro sconto del 10% su incassi3 (primo e ultimo giorno)
+        // Questo NON modificherà incassi2, perché ora incassi3 è indipendente
+        incassi3[0] = incassi3[0] - (incassi3[0] / 100 * 10);
+        incassi3[6] = incassi3[6] - (incassi3[6] / 100 * 10);
+
+        // Visualizza i due array per confrontare
+        console.log("incassi2 dopo sconto su incassi3:", incassi2); // Non modificato da incassi3
+        console.log("incassi3:", incassi3); // Modificato con nuovo sconto
+
+        // Calcolo della media su incassi3
+        var media3 = 0;
+        for (var i = 1; i < incassi3.length; i++) {
+            media3 += incassi3[i];
+        }
+        media3 = media3 / 7;
+
+        // Visualizzazione finale di tutte le medie
+        console.log("La media settimanale senza sconto è: " + media1.toFixed(2));
+        console.log("La media settimanale con sconto su incassi2 è: " + media2.toFixed(2));
+        console.log("La media settimanale con sconto su incassi3 è: " + media3.toFixed(2));
+    </script>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Andamento Studente V2</title>
+    </head>
+    <body>
+        <h1>Andamento Studente V2</h1>
+    </body>
+    <script>
+        function confrontaMedie() {
+            // Il primo (indice 0) è la media del primo periodo
+            // Dal secondo indice in poi ci sono i voti del secondo periodo
+
+            // Controllo per vedere se son presenti voti oltre a quello della prima media
+            if (arguments.length <= 1) {
+                return "Nessun voto inserito nè per il primo periodio nè per il secondo periodo";
+            }
+
+            // Assegniamo i valori con arguments
+            let mediaPrimoPeriodo = arguments[0]; 
+            let somma = 0;
+            let numVoti = arguments.length - 1; // un valore sarà per il primo periodo
+
+            // Somma dei voti dal secondo argomento in poi
+            for (let i = 1; i < arguments.length; i++) {
+                somma += arguments[i];
+            }
+
+            // Calcoliamo la media del secondo periodo
+            let mediaSecondoPeriodo = somma / numVoti;
+
+            // Blocco di codice che ritorna un array di due elementi che equivalgono ad un giudizio
+            if(mediaSecondoPeriodo < 6 && mediaSecondoPeriodo == mediaPrimoPeriodo) {
+                return [1,0];
+            } else if(mediaSecondoPeriodo < 6 && mediaSecondoPeriodo < mediaPrimoPeriodo) {
+                return [0,1];
+            } else if(mediaSecondoPeriodo >= 6 && mediaSecondoPeriodo < mediaPrimoPeriodo) {
+                return [1,1];
+            } else if(mediaSecondoPeriodo >= 6 && mediaSecondoPeriodo > mediaPrimoPeriodo) {
+                return [0,0];
+            }
+        }
+
+        // Funzione principale che gestisce il giudizio degli studenti
+        function gestisciStudenti() {
+            let numStudenti = parseInt(prompt("Inserire il numero di studenti"))
+            if(numStudenti <= 0) {
+                while(numStudenti <= 0) {
+                    numStudenti = parseInt(prompt("Valore negativo! Reinserire il numero di studenti"))
+                }
+            }
+            const studenti = [];
+
+            for (let i = 0; i < numStudenti; i++) {
+                let nome = prompt("Inserire il nome dello studente n." + (i + 1))
+                let mediaPrimoPeriodo = parseInt(prompt("Inserire la media del primo periodo di " + (nome) ))
+                if(mediaPrimoPeriodo <= 0) {
+                    while(mediaPrimoPeriodo <= 0) {
+                        mediaPrimoPeriodo = parseInt(prompt("Valore non accettabile! Reinserire la media del primo periodo di " + (nome) ))
+                    }
+                }
+
+                let numVotiSecondoPeriodo = parseInt(prompt("Inserire il numero di voti del secondo periodo di " + (nome)))
+                if(numVotiSecondoPeriodo <= 0) {
+                    while(numVotiSecondoPeriodo <= 0) {
+                        numVotiSecondoPeriodo = parseInt(prompt("Valore non accettabile! Reinserire il numero di voti del secondo periodo di " + (nome)))
+                    }
+                }
+
+                const votiSecondoPeriodo = [];
+                for(let j = 0; j < numVotiSecondoPeriodo; j++) {
+                    let votoSecondoPeriodo = parseInt(prompt("Inserire il voto n." + (j +1) + " per " + (nome)))
+                    if(votoSecondoPeriodo <= 0) {
+                        while(votoSecondoPeriodo <= 0) {
+                            votoSecondoPeriodo = parseInt(prompt("Valore non accettabile! Reinserire il voto n." + (j +1) + " per " + (nome)))
+                        }
+                    }   
+                    votiSecondoPeriodo.push(votoSecondoPeriodo); 
+                }
+
+                studenti.push({
+                    nome: nome,
+                    mediaPrimo: mediaPrimoPeriodo,
+                    votiSecondo: votiSecondoPeriodo
+                });
+            }
+
+            // Ciclo for...of per accedere ai valori di ogni studente
+            for (let studente of studenti) {
+                // Stampiamo a console i dati dello studente
+                console.log("Nome:", studente.nome);
+                console.log("Media primo quadrimestre:", studente.mediaPrimo);
+                console.log("Voti secondo quadrimestre:", studente.votiSecondo);
+
+                // Richiamo della funzione confronta
+                let [A, B] = confrontaMedie(studente.mediaPrimo, ...studente.votiSecondo);
+
+                // Confronto delle medie e stampa a console il giudizio 
+                if(A === 1 && B === 0) {
+                    console.log("Giudizio: Media insufficiente e uguale al primo periodo")
+                } else if(A === 0 && B === 1) {
+                    console.log("Giudizio: Media insufficiente e peggiorata dal primo periodo")
+                } else if(A === 1 && B === 1) {
+                    console.log("Giudizio: Media sufficiente ma peggiorata dal primo periodo")
+                } else if(A === 0 && B === 0) {
+                    console.log("Giudizio: Media sufficiente e migliorata dal primo periodo")
+                }
+
+                // Stampiamo a console una divisione per avere maggiore ordinamento visuale
+                console.log("-----------------------------\n");
+            }     
+        }
+
+        gestisciStudenti();
+    </script>
+</html>

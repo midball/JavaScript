@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width-device-width, initial-scale=1.0">
+        <title>Cambia Colore Di Sfondo</title>
+    </head>
+    <body>
+        <button onclick = "cambiaColore()">Scopri i nuovi colori!</button>
+        <script>
+            function cambiaColore() {
+                var coloriDisponibili = ["#03f4fc", "#03cffc", "#03adfc", "#038cfc", "#0349fc"];
+                var coloreCasuale = coloriDisponibili[Math.floor(Math.random() * coloriDisponibili.length)];
+                document.body.style.backgroundColor = coloreCasuale;
+            }
+        </script>
+    </body> 
+</html>
